@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment_09</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: black;
+        }
+
+        section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 650px;
+
+        }
+
+        .light {
+            border-bottom: #ffffff solid 2px;
+            border-top: #ffffff solid 2px;
+        }
+
+        div {
+            width: 80px;
+            height: 40px;
+            margin: 4px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 8px;
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+        h2 {
+            color: brown;
+        }
+
+    </style>
+
+</head>
+<body>
+<section>
+    <h2>JavaScript Knight Rider</h2>
+</section>
+
+<section class="light">
+    <div class="li"></div>
+    <div class="li"></div>
+    <div class="li"></div>
+    <div class="li"></div>
+    <div class="li"></div>
+    <div class="li"></div>
+    <div class="li"></div>
+</section>
+<section class="btn">
+    <button type="button" id="start">Start</button>
+    <button type="button" id="stop">Stop</button>
+</section>
+
+<!--Jquery lib-->
+<script src="lib/jquery-3.7.1.min.js"></script>
+<script>
+
+    let inter = null;
+
+    $("#start").on("click",function (){
+        inter = setInterval(updateLight,75);
+    });
+
+    $("#stop").on("click",function (){
+        clearInterval(inter);
+    });
+
+    let current_light = 1;
+    let direction = "RIGHT"; //RIGHT,LEFT
+
+    updateLight = () => {
+        if (direction === "RIGHT") {
+            current_light++;
+            $(".li").css("background-color", "white");
+            $(".li").eq(current_light-1).css("background-color", "#FF9C9CFF");
+            $(".li").eq(current_light-2).css("background-color", "#fdbfbf");
+            $(".li").eq(current_light).css("background-color", "red");
+
+
+            if (current_light === 6) {
+                direction = "LEFT";
+            }
+        } else {
+            current_light--;
+            $(".li").css("background-color", "white");
+            $(".li").eq(current_light).css("background-color", "red");
+            $(".li").eq(current_light+1).css("background-color", "#FF9C9CFF");
+            $(".li").eq(current_light+2).css("background-color", "#fdbfbf");
+
+            if (current_light === 0) {
+                direction = "RIGHT";
+                current_light++;
+            }
+        }
+
+    }
+
+</script>
+</body>
+</html>
